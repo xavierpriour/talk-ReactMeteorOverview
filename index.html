@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>React...  and a little Meteor</title>
+
+		<meta name="description" content="A lightning talk about React and its integration with Meteor">
+		<meta name="author" content="Xavier Priour">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<section>
+						<h1>React</h1>
+						<hr/>
+						<h2>and a little Meteor</h2>
+
+						<h6 style="padding-top: 60px;">A lightning-fast opinionated overview</h6>
+						<p>
+							<small>by <a href="https://github.com/xavierpriour">Xavier Priour</a></small>
+						</p>
+					</section>
+					<section data-markdown>
+							### Your presenter
+
+							- Xavier Priour
+							  - https://github.com/xavierpriour
+							  - xavier.priour@bubblyware.com
+							- professional IT since 2000
+							- freelance and SaaS founder
+								- https://timetom.com/
+								- http://www.assetsagacity.com/
+					</section>
+					<section data-markdown>
+						### Your presentation
+
+						- https://github.com/xavierpriour/talk-ReactMeteorOverview
+						- **NOT** another tutorial
+						- the explanation I looked for when I started!
+						- bird's eye view
+						- nearly no code
+						- 80% React, 20% Meteor
+						- OPINIONATED
+					</section>
+				</section>
+
+				<section>
+					<h2>Where does React come from?</h2>
+					<ul>
+						<li><a href="https://www.facebook.com/meteorjs/" target="_blank">Facebook production</a>: battle-tested, scalable, supported</li>
+						<li>User Interface: focused, limited</li>
+						<li>a solution to modern UI issues:
+							<ul>
+							<li>synchronizing multiple DOM elements</li>
+							<li>event storms</li>
+							<li>maintainability / evolutivity</li>
+							</ul>
+						</li>
+					</ul>
+					<blockquote style="margin-top: 60px">
+						&ldquo;React is a <strong>great solution</strong>
+						to a <strong>real problem</strong>
+						backed by a <strong>rich and talented company</strong>.&rdquo;
+					</blockquote>
+				</section>
+
+				<section data-markdown>
+          ## React is not
+
+          - a framework, a stack, a paradigm, etc.
+          - a silver bullet
+          - a fad
+          - hard (especially with Meteor :)
+          - easy
+				</section>
+
+				<section>
+					<section>
+						<h2>React is...</h2>
+
+            <p>
+              <img src="img/react.svg" style="border: 0; background-color: unset;"/>
+            </p>
+					</section>
+					<section>
+						<h2>a technology</h2>
+
+            <p>
+              <img src="img/react.png" style="border: 0; background-color: unset;"/>
+            </p>
+					</section>
+					<section data-markdown>
+						## a mindset
+
+						- Components
+						- One-way flow
+						- Declarative
+						- Everything in Javascript
+					</section>
+					<section>
+						<h2>(intermission)</h2>
+            <pre><code data-trim>
+Comment = React.createClass({
+  render: function() {
+    return (
+      <div className="comment">
+        <h2 className="commentAuthor">
+          {this.props.author}
+        </h2>
+        {this.props.children}
+      </div>
+    );
+  }
+});
+            </code></pre>
+          </section>
+          <section>
+            <h2>(more code!)</h2>
+            <pre><code data-trim>
+CommentList = React.createClass({
+  render: function() {
+    return (
+      <div className="commentList">
+        &lt;Comment author="Pete Hunt">
+          This is one comment
+        &lt;/Comment>
+        &lt;Comment author="Jordan Walke">
+          This is *another* comment
+        &lt;/Comment>
+      </div>
+    );
+  }
+});
+            </code></pre>
+  				</section>
+					<section data-markdown>
+						## a community/ecosystem
+
+						- off-the-shelf components: [Material UI](http://www.material-ui.com/),...
+						- tooling: React Dev Tools, IDE, composers, Radium,...
+						- other targets: React-Native
+						- ...
+					</section>
+					<section data-markdown>
+						## some best practices
+
+						- everything is a component
+						- Smart and Dumb
+						- lifecycle methods
+						- performance: shouldComponentUpdate, profiler
+						- beware jQuery
+					</section>
+				</section>
+        <section>
+          <section data-markdown>
+            ## Why React?
+
+            - design your UI code in a great way
+            - keep performance and maintainability
+            - benefit from the ecosystem
+          </section>
+          <section data-markdown>
+            ## With Meteor?
+
+            - super easy integration
+            - officially supported
+            - clean separation
+          </section>
+          <section>
+            <h2>(proof by code)</h2>
+            <pre><code data-trim>
+meteor add react
+meteor add kadira:react-layout
+            </code></pre>
+            <pre><code data-trim>
+FlowRouter.route('/', {
+  action() {
+    ReactLayout.render(MyReactComponent, {props});
+  }
+});
+            </code></pre>
+            <a href="https://kadira.io/academy/meteor-routing-guide/content/rendering-react-components">Flow Router rendering React</a>
+          </section>
+
+        </section>
+        <section data-markdown>
+          ## Bright future!
+          ___
+          ###The Facebook stack
+
+          Flux & implementations (Relay, Redux,...)
+
+          GraphQL
+          ___
+          ###modern Meteor architecture
+
+          ~~Blaze (2)~~
+
+          [Meteor Guide](http://guide.meteor.com/ui-ux.html)
+
+          [Mantra](https://github.com/kadirahq/mantra)
+        </section>
+
+        <section data-markdown>
+          ## Tutorials
+
+          [Official React tutorial by Facebook](http://facebook.github.io/react/docs/tutorial.html)
+
+          [Meteor integration](http://react-in-meteor.readthedocs.org/en/latest/)
+
+          [Meteor todo app tutorial in React](https://www.meteor.com/tutorials/react/creating-an-app)
+        </section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
